@@ -6,17 +6,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.alfa_bank.convertor_to_gif.dto.ExchangeRateDto;
 
-@FeignClient(name = "openexchange-client", url = "${giphy.api.url}")
+@FeignClient(name = "openexchange-client", url = "${openexchangerates.url}")
 public interface ExchangeRateClient {
 
     @GetMapping("/historical/{date}.json")
     ExchangeRateDto getHistoricalRate(
             @PathVariable String date,
-            @RequestParam("app_id") String appId
+            @RequestParam("app_id") String appId,
+            @RequestParam("symbols") String symbols
     );
 
     @GetMapping("/latest.json")
     ExchangeRateDto getLatestRate(
-            @RequestParam("app_id") String appId
+            @RequestParam("app_id") String appId,
+            @RequestParam("symbols") String symbols
     );
 }
