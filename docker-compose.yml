@@ -1,0 +1,8 @@
+version: '1'
+services:
+  app:
+    container_name: convertor_to_gif
+    image: convertor_to_gif_app:latest
+    build: ./
+    ports:
+      - "8080:8080"
