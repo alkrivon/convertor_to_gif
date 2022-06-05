@@ -3,7 +3,6 @@ package ru.alfa_bank.convertor_to_gif.controller;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
@@ -26,7 +25,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @ExtendWith(SpringExtension.class)
-@AutoConfigureMockMvc(addFilters = false)
 @WebMvcTest(ConvertorController.class)
 class ConvertorControllerTest {
 
@@ -59,7 +57,7 @@ class ConvertorControllerTest {
         when(exchangeRateService.getTag(anyString())).thenReturn("broke");
         when(gifService.getGif("broke")).thenReturn(responseEntity);
         mockMvc.perform(get("http://localhost:8080/convertor/gif/test")
-                        .contentType(MediaType.APPLICATION_JSON))
+                .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(jsonPath("$.key").value("broke"))
                 .andExpect(status().isOk());
