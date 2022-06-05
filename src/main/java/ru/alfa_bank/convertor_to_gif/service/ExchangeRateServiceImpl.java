@@ -41,7 +41,6 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
         String formateDate = getFormatDate();
         Double todayRate = getLatestRate(symbols).getRates().get(symbols);
         Double yesterdayRate = getHistoricalRate(formateDate, symbols).getRates().get(symbols);
-        System.out.println(todayRate + " ... " + yesterdayRate);
         if (todayRate > yesterdayRate) {
             tag = "rich";
         } else {
